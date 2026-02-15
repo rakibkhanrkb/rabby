@@ -11,6 +11,7 @@ const Admin: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
   const [filterDate, setFilterDate] = useState(new Date().toISOString().split('T')[0]);
+  const govtLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1024px-Government_Seal_of_Bangladesh.svg.png";
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,12 +146,14 @@ const Admin: React.FC = () => {
         {/* PDF Header - Only visible during print */}
         <div className="hidden print:block p-8 border-b-4 border-blue-900 bg-blue-50/30">
           <div className="flex justify-between items-start">
-            <div>
-              <h1 className="text-3xl font-black text-blue-900 leading-tight">{DOCTOR_INFO.name}</h1>
-              <p className="text-xl font-bold text-blue-700 mt-1">{DOCTOR_INFO.title}</p>
-              <p className="text-gray-700 font-medium">{DOCTOR_INFO.degrees}</p>
-              <p className="text-gray-600 text-sm mt-1">{DOCTOR_INFO.hospital}</p>
-              <p className="text-gray-500 text-sm">{DOCTOR_INFO.location}</p>
+            <div className="flex items-start space-x-6">
+              <img src={govtLogoUrl} alt="Logo" className="h-20 w-20 object-contain" />
+              <div>
+                <h1 className="text-3xl font-black text-blue-900 leading-tight">{DOCTOR_INFO.name}</h1>
+                <p className="text-xl font-bold text-blue-700 mt-1">{DOCTOR_INFO.title}</p>
+                <p className="text-gray-700 font-medium">{DOCTOR_INFO.degrees}</p>
+                <p className="text-gray-600 text-sm mt-1 font-bold">{DOCTOR_INFO.hospital}</p>
+              </div>
             </div>
             <div className="text-right">
               <div className="bg-blue-900 text-white px-4 py-2 rounded-lg inline-block font-bold mb-2">

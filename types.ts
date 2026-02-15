@@ -25,3 +25,7 @@ export const DOCTOR_INFO: DoctorInfo = {
   hospital: "কাজিপুর উপজেলা স্বাস্থ্য কমপ্লেক্স",
   location: "সিরাজগঞ্জ"
 };
+
+// Fixed: Removed invalid ambient module declarations for images (*.jpg, *.jpeg, *.png, *.webp) 
+// that were causing TypeScript errors. Such declarations must be in a non-module environment 
+// (e.g., a .d.ts file without exports).

@@ -4,32 +4,27 @@ import { Link } from 'react-router-dom';
 import { DOCTOR_INFO } from '../types';
 
 const Header: React.FC = () => {
-  const doctorImageUrl = "https://raw.githubusercontent.com/mdgolamrabbi/doctor-app/main/doctor.jpg";
+  const govtLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1024px-Government_Seal_of_Bangladesh.svg.png";
 
   return (
     <header className="bg-blue-700 text-white shadow-lg no-print">
       <nav className="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
-        <Link to="/" className="flex items-center space-x-3 mb-4 md:mb-0 group">
+        <Link to="/" className="flex items-center space-x-4 mb-4 md:mb-0 group">
           <div className="relative">
-            <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-white shadow-inner bg-white flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="h-14 w-14 rounded-full bg-white p-1 flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
               <img 
-                src={doctorImageUrl}
-                alt={DOCTOR_INFO.name}
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  (e.target as any).style.display = 'none';
-                  (e.target as any).nextSibling.style.display = 'flex';
-                }}
+                src={govtLogoUrl}
+                alt="Bangladesh Govt Logo"
+                className="h-full w-full object-contain"
               />
-              <div className="hidden h-full w-full items-center justify-center text-blue-700">
-                <i className="fa-solid fa-user-doctor text-xl"></i>
-              </div>
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-blue-700 shadow-sm"></div>
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-bold tracking-tight leading-none">{DOCTOR_INFO.name}</span>
-            <span className="text-[10px] uppercase tracking-widest opacity-80 font-medium mt-1">Specialist Consultant</span>
+            <span className="text-[10px] uppercase tracking-widest opacity-90 font-bold mt-1.5 flex items-center">
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+              {DOCTOR_INFO.hospital}
+            </span>
           </div>
         </Link>
         <div className="flex items-center space-x-6 text-sm md:text-base font-medium">

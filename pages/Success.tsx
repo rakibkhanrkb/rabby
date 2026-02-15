@@ -8,6 +8,7 @@ const Success: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [appointment, setAppointment] = useState<Appointment | null>(null);
   const [isPrinting, setIsPrinting] = useState(false);
+  const govtLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1024px-Government_Seal_of_Bangladesh.svg.png";
 
   useEffect(() => {
     if (id) {
@@ -78,12 +79,14 @@ const Success: React.FC = () => {
 
       {/* Appointment Slip (Optimized for Printing) */}
       <div id="printable-slip" className="bg-white border-2 border-dashed border-gray-300 p-8 rounded-lg shadow-sm print:border-solid print:shadow-none print:p-4">
-        {/* Header (Doctor Info) */}
-        <div className="text-center border-b pb-6 mb-6">
+        {/* Header (Official Info) */}
+        <div className="flex flex-col items-center text-center border-b pb-6 mb-6">
+          <img src={govtLogoUrl} alt="BD Govt Logo" className="h-16 w-16 object-contain mb-3" />
           <h3 className="text-2xl font-extrabold text-blue-900 mb-1">{DOCTOR_INFO.name}</h3>
           <p className="font-bold text-blue-700">{DOCTOR_INFO.title}</p>
-          <p className="text-sm text-gray-600 mb-2">{DOCTOR_INFO.degrees}</p>
-          <p className="text-xs text-gray-500">{DOCTOR_INFO.hospital}, {DOCTOR_INFO.location}</p>
+          <p className="text-sm text-gray-600 mb-1">{DOCTOR_INFO.degrees}</p>
+          <p className="text-xs text-gray-500 font-bold">{DOCTOR_INFO.hospital}</p>
+          <p className="text-[10px] text-gray-400 tracking-widest uppercase mt-1">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়</p>
         </div>
 
         {/* Big Serial Number */}

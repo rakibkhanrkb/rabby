@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { DOCTOR_INFO } from '../types';
 
 const Home: React.FC = () => {
+  // Use direct URL instead of local import to avoid module resolution errors in browser
   const doctorImageUrl = "https://raw.githubusercontent.com/mdgolamrabbi/doctor-app/main/doctor.jpg";
 
   return (
@@ -11,12 +12,14 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-blue-50">
         <div className="md:w-2/5 relative bg-blue-50">
-          <img 
-            src={doctorImageUrl} 
-            alt={DOCTOR_INFO.name} 
+          <img
+            src={doctorImageUrl}
+            alt={DOCTOR_INFO.name}
             className="w-full h-full object-cover min-h-[450px]"
             onError={(e) => {
-              (e.target as any).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000";
+              // Fallback image if the primary URL fails
+              (e.target as HTMLImageElement).src =
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000";
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-transparent"></div>
