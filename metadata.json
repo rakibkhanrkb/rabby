@@ -1,0 +1,7 @@
+{
+  "name": "Dr. Golam Rabbi Khan - Appointment System",
+  "description": "A professional doctor appointment booking system for Dr. Md. Golam Rabbi Khan, featuring patient registration, serial number generation, and an admin dashboard for management and printing.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
