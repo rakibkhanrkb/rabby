@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { DOCTOR_INFO } from '../types';
 
 const Home: React.FC = () => {
-  // Use direct URL instead of local import to avoid module resolution errors in browser
-  const doctorImageUrl = "https://raw.githubusercontent.com/mdgolamrabbi/doctor-app/main/doctor.jpg";
+  // Using the absolute path from the public folder
+  const doctorImageUrl = "/pictures/rabbi.jpg";
 
   return (
     <div className="space-y-12">
@@ -15,18 +15,18 @@ const Home: React.FC = () => {
           <img
             src={doctorImageUrl}
             alt={DOCTOR_INFO.name}
-            className="w-full h-full object-cover min-h-[450px]"
+            className="w-full h-full object-cover min-h-[450px] object-top scale-105 transition-transform duration-700 hover:scale-100"
             onError={(e) => {
               // Fallback image if the primary URL fails
               (e.target as HTMLImageElement).src =
                 "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent"></div>
           <div className="absolute bottom-6 left-6 text-white no-print">
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/30">
-              <i className="fa-solid fa-user-check text-blue-400"></i>
-              <span className="text-xs font-bold uppercase tracking-wider">Registered Practitioner</span>
+            <div className="flex items-center space-x-2 bg-blue-600/40 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
+              <i className="fa-solid fa-user-check text-green-400"></i>
+              <span className="text-xs font-bold uppercase tracking-wider">BMDC Registered</span>
             </div>
           </div>
         </div>
