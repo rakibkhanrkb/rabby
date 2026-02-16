@@ -38,7 +38,7 @@ const Home: React.FC = () => {
             {DOCTOR_INFO.name}
           </h1>
           <h2 className="text-xl font-semibold text-blue-700 mb-2">
-            {DOCTOR_INFO.title}
+            {DOCTOR_INFO.title2}
           </h2>
           <p className="text-gray-600 text-lg mb-6 italic">
             {DOCTOR_INFO.degrees}

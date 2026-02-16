@@ -11,10 +11,7 @@ const Header: React.FC = () => {
     <header className="bg-blue-700 text-white shadow-lg no-print sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
         <Link to="/" className="flex items-center space-x-4 mb-4 md:mb-0 group">
-<<<<<<< HEAD
           
-=======
->>>>>>> aa3da0f104c33c37cdd0c001a97b5b7b74ee12f3
     
             {/* Doctor Portrait (Bottom) */}
             <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-blue-50 overflow-hidden border-2 border-white shadow-md transition-transform group-hover:scale-105">
@@ -28,11 +25,7 @@ const Header: React.FC = () => {
                 }}
               />
             </div>
-<<<<<<< HEAD
           
-=======
-  
->>>>>>> aa3da0f104c33c37cdd0c001a97b5b7b74ee12f3
           
           {/* Modern Info Block */}
           <div className="flex flex-col border-l-2 border-white/20 pl-4 space-y-0.5">
