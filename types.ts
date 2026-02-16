@@ -21,9 +21,10 @@ export interface DoctorInfo {
 export const DOCTOR_INFO: DoctorInfo = {
   name: "ডাঃ মোঃ গোলাম রাব্বি খান",
   title: "সহকারী সার্জন",
-  degrees: "এমবিবিএস, এফসিপিএস (part-1), এমআরসিএস (part A)",
-  hospital: "কাজিপুর উপজেলা স্বাস্থ্য কমপ্লেক্স",
-  location: "সিরাজগঞ্জ"
+  degrees: "এমবিবিএস (রামেক),বিসিএস (স্বাস্থ্য), এফসিপিএস-এফপি(অর্থোপেডিক সার্জারি), এমআরসিএস-বি(এডিনবার্গ-ইউকে)",
+  hospital: "কাজিপুর উপজেলা স্বাস্থ্য কমপ্লেক্স,সিরাজগঞ্জ",
+  location: "সিরাজগঞ্জ",
+  chember: "দি লাইফ কেয়ার ডায়াগনস্টিক সেন্টার,বিসিক মোড়, শিয়ালকোল,সিরাজগঞ্জ (শহীদ এম মনসুর আলী মেডিকেল কলেজ হাসপাতালের বিপরীতে)  "
 };
 
 // Fixed: Removed invalid ambient module declarations for images (*.jpg, *.jpeg, *.png, *.webp) 

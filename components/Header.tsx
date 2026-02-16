@@ -11,16 +11,8 @@ const Header: React.FC = () => {
     <header className="bg-blue-700 text-white shadow-lg no-print sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
         <Link to="/" className="flex items-center space-x-4 mb-4 md:mb-0 group">
-          {/* Vertical Logo Group */}
-          <div className="flex flex-col items-center justify-center space-y-1 flex-shrink-0">
-            {/* Govt Logo (Top) */}
-            <div className="h-6 w-6 rounded-full bg-white p-0.5 flex items-center justify-center shadow-sm z-10">
-              <img 
-                src={govtLogoUrl}
-                alt="BD Govt Logo"
-                className="h-full w-full object-contain"
-              />
-            </div>
+          
+    
             {/* Doctor Portrait (Bottom) */}
             <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-blue-50 overflow-hidden border-2 border-white shadow-md transition-transform group-hover:scale-105">
               <img 
@@ -33,7 +25,7 @@ const Header: React.FC = () => {
                 }}
               />
             </div>
-          </div>
+          
           
           {/* Modern Info Block */}
           <div className="flex flex-col border-l-2 border-white/20 pl-4 space-y-0.5">

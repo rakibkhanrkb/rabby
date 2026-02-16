@@ -5,7 +5,7 @@ import { DOCTOR_INFO } from '../types';
 
 const Home: React.FC = () => {
   // Using the absolute path from the public folder
-  const doctorImageUrl = "/pictures/rabbi.jpg";
+  const doctorImageUrl = "/pictures/rabbi2.jpg";
 
   return (
     <div className="space-y-12">
@@ -58,8 +58,8 @@ const Home: React.FC = () => {
                 <i className="fa-solid fa-location-dot"></i>
               </div>
               <div>
-                <p className="text-xs font-bold text-gray-400 uppercase">ঠিকানা</p>
-                <p className="font-medium">{DOCTOR_INFO.location}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase">চেম্বার</p>
+                <p className="font-medium">{DOCTOR_INFO.chember}</p>
               </div>
             </div>
           </div>
