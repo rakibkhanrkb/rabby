@@ -1,4 +1,4 @@
-
+// Fixed: Ensured initializeApp is correctly imported from 'firebase/app' and removed empty lines that might cause resolution issues.
 import { initializeApp } from "firebase/app";
 import { 
   getFirestore, 
@@ -19,7 +19,8 @@ import { Appointment } from './types';
  * Firebase Configuration
  */
 const firebaseConfig = {
-  apiKey: "AIzaSyAs-Placeholder-Key-Change-This", 
+  // Fixed: Obtained API key from environment variable as per global guidelines.
+  apiKey: process.env.API_KEY, 
   authDomain: "rabby-41829.firebaseapp.com",
   projectId: "rabby-41829",
   storageBucket: "rabby-41829.appspot.com",
@@ -40,7 +41,8 @@ export class FirebaseService {
     try {
       const dailyQuery = query(this.appointmentsCol, where("date", "==", patient.date));
       const snapshot = await getCountFromServer(dailyQuery);
-      const nextSerial = snapshot.data().count + 1;
+      // Serial number starts from 03 (count + 3)
+      const nextSerial = Number(snapshot.data().count) + 3;
 
       const appointmentData = {
         ...patient,
@@ -103,8 +105,6 @@ export class FirebaseService {
 
   async getAppointmentsByPhone(phone: string): Promise<Appointment[]> {
     try {
-      // To avoid 'The query requires an index' error, we remove the orderBy from the server-side query
-      // and perform the sorting on the client side instead.
       const q = query(this.appointmentsCol, where("phone", "==", phone));
       const querySnapshot = await getDocs(q);
       
@@ -117,7 +117,6 @@ export class FirebaseService {
         };
       }) as Appointment[];
 
-      // Sort by timestamp descending in-memory
       return results.sort((a, b) => {
         const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
         const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;

@@ -64,9 +64,37 @@ const Admin: React.FC = () => {
     }, 250);
   };
 
-  const filteredAppointments = appointments
+  // Get real appointments for the filtered date
+  const realAppointments = appointments
     .filter(app => app.date === filterDate)
     .sort((a, b) => a.serialNumber - b.serialNumber);
+
+  // Generate the display list including virtual "Reserved" entries for 01 and 02
+  const displayAppointments = [
+    { 
+      id: 'reserved-01', 
+      serialNumber: 1, 
+      patientName: 'সংরক্ষিত (Reserved)', 
+      phone: '----------', 
+      age: '--', 
+      date: filterDate, 
+      timestamp: null, 
+      status: 'completed' as const,
+      isReserved: true 
+    },
+    { 
+      id: 'reserved-02', 
+      serialNumber: 2, 
+      patientName: 'সংরক্ষিত (Reserved)', 
+      phone: '----------', 
+      age: '--', 
+      date: filterDate, 
+      timestamp: null, 
+      status: 'completed' as const,
+      isReserved: true 
+    },
+    ...realAppointments
+  ];
 
   const todayCount = appointments.filter(app => app.date === new Date().toISOString().split('T')[0]).length;
 
@@ -142,8 +170,8 @@ const Admin: React.FC = () => {
           <p className="text-gray-500 text-sm font-bold uppercase tracking-wider">রিপোর্ট জেনারেট</p>
           <button 
             onClick={handlePrint} 
-            disabled={filteredAppointments.length === 0 || isPrinting}
-            className={`mt-2 w-full text-white px-4 py-3 rounded-xl font-bold flex items-center justify-center transition-all shadow-md active:scale-95 ${filteredAppointments.length === 0 || isPrinting ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'}`}
+            disabled={isPrinting}
+            className={`mt-2 w-full text-white px-4 py-3 rounded-xl font-bold flex items-center justify-center transition-all shadow-md active:scale-95 ${isPrinting ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'}`}
           >
             <i className={`fa-solid ${isPrinting ? 'fa-circle-notch fa-spin' : 'fa-file-pdf'} mr-2`}></i> 
             {isPrinting ? 'প্রস্তুত হচ্ছে...' : 'PDF হিসেবে সেভ করুন'}
@@ -192,7 +220,7 @@ const Admin: React.FC = () => {
                 রোগীর তালিকা রিপোর্ট
               </div>
               <p className="text-gray-800 font-bold text-lg">তারিখ: {new Date(filterDate).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-              <p className="text-gray-600 font-bold">মোট রোগী: {filteredAppointments.length} জন</p>
+              <p className="text-gray-600 font-bold">মোট রোগী: {realAppointments.length} জন (+ ২ জন সংরক্ষিত)</p>
             </div>
           </div>
         </div>
@@ -201,7 +229,7 @@ const Admin: React.FC = () => {
           <div className="flex justify-between items-center mb-6 no-print">
             <h4 className="text-xl font-bold text-gray-800 flex items-center tracking-tight">
               <i className="fa-solid fa-clipboard-list mr-3 text-blue-600"></i>
-              {new Date(filterDate).toLocaleDateString('bn-BD')} তারিখের তালিকা ({filteredAppointments.length} জন)
+              {new Date(filterDate).toLocaleDateString('bn-BD')} তারিখের তালিকা (সিরিয়াল ০১-০২ সংরক্ষিত)
             </h4>
           </div>
 
@@ -217,33 +245,25 @@ const Admin: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredAppointments.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-20 text-center text-gray-400 italic text-lg no-print">
-                      এই তারিখে কোনো রেজিস্ট্রেশন পাওয়া যায়নি।
+                {displayAppointments.map((app: any) => (
+                  <tr key={app.id} className={`transition-colors print:hover:bg-white ${app.isReserved ? 'bg-orange-50/50 italic' : 'odd:bg-white even:bg-gray-50/30 hover:bg-blue-50'}`}>
+                    <td className={`px-6 py-4 font-black border-r border-gray-200 ${app.isReserved ? 'text-orange-600' : 'text-blue-700'}`}>
+                      {app.serialNumber < 10 ? `০${app.serialNumber}` : app.serialNumber}
+                    </td>
+                    <td className={`px-6 py-4 border-r border-gray-200 ${app.isReserved ? 'text-gray-400' : 'font-bold text-gray-800'}`}>
+                      {app.patientName}
+                    </td>
+                    <td className={`px-6 py-4 border-r border-gray-200 font-mono font-medium ${app.isReserved ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {app.phone}
+                    </td>
+                    <td className={`px-6 py-4 text-center border-r border-gray-200 ${app.isReserved ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {app.age} {app.age !== '--' ? 'বছর' : ''}
+                    </td>
+                    <td className="px-6 py-4 text-gray-500 text-xs text-right font-medium">
+                      {app.timestamp ? new Date(app.timestamp).toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }) : '--:--'}
                     </td>
                   </tr>
-                ) : (
-                  filteredAppointments.map((app) => (
-                    <tr key={app.id} className="hover:bg-blue-50 transition-colors print:hover:bg-white odd:bg-white even:bg-gray-50/30">
-                      <td className="px-6 py-4 font-black text-blue-700 border-r border-gray-200">
-                        {app.serialNumber < 10 ? `০${app.serialNumber}` : app.serialNumber}
-                      </td>
-                      <td className="px-6 py-4 font-bold text-gray-800 border-r border-gray-200">
-                        {app.patientName}
-                      </td>
-                      <td className="px-6 py-4 text-gray-700 font-mono font-medium border-r border-gray-200">
-                        {app.phone}
-                      </td>
-                      <td className="px-6 py-4 text-gray-700 text-center border-r border-gray-200">
-                        {app.age} বছর
-                      </td>
-                      <td className="px-6 py-4 text-gray-500 text-xs text-right font-medium">
-                        {app.timestamp ? new Date(app.timestamp).toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                      </td>
-                    </tr>
-                  ))
-                )}
+                ))}
               </tbody>
             </table>
           </div>
