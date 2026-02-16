@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         </div>
         <div className="md:w-3/5 p-8 md:p-12 flex flex-col justify-center bg-white">
           <div className="inline-block bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold mb-6">
-            বিশেষজ্ঞ ডাক্তার
+             ডাক্তার
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4 leading-tight">
             {DOCTOR_INFO.name}
@@ -63,38 +63,87 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link 
               to="/book" 
-              className="bg-blue-700 text-white px-8 py-4 rounded-xl text-center font-bold text-lg hover:bg-blue-800 transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="sm:col-span-2 bg-blue-700 text-white px-8 py-4 rounded-xl text-center font-bold text-lg hover:bg-blue-800 transition-all shadow-lg hover:scale-[1.01] active:scale-95 flex items-center justify-center mb-1"
             >
               <i className="fa-solid fa-calendar-check mr-2"></i> অ্যাপোয়েন্টমেন্ট নিন
             </Link>
+            
             <a 
               href="tel:+8801725675580" 
-              className="border-2 border-blue-700 text-blue-700 px-8 py-4 rounded-xl text-center font-bold text-lg hover:bg-blue-50 transition-all flex items-center justify-center"
+              className="border-2 border-blue-700 text-blue-700 px-4 py-3 rounded-xl text-center font-bold text-base hover:bg-blue-50 transition-all flex items-center justify-center group"
             >
-              <i className="fa-solid fa-phone-volume mr-2"></i> সরাসরি কল করুন
+              <i className="fa-solid fa-phone-volume mr-2 group-hover:animate-bounce"></i> সরাসরি কল করুন
+            </a>
+            
+            <a 
+              href="https://wa.me/8801773293989" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-600 text-white px-4 py-3 rounded-xl text-center font-bold text-base hover:bg-green-700 transition-all shadow-md flex items-center justify-center group"
+            >
+              <i className="fa-brands fa-whatsapp mr-2 text-xl group-hover:scale-110 transition-transform"></i> হোয়াটসঅ্যাপ মেসেজ
             </a>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section - 3 divs horizontal flex/grid */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { icon: 'fa-user-nurse', title: 'পরামর্শ', desc: 'রোগীর সমস্যা শুনে আধুনিক চিকিৎসা পদ্ধতি ও সঠিক গাইডেন্স প্রদান।' },
-          { icon: 'fa-notes-medical', title: 'চেকআপ', desc: 'নিমিত্ত রুটিন স্বাস্থ্য পরীক্ষা এবং দীর্ঘমেয়াদী রোগের সঠিক যত্ন ও ফলোআপ।' },
-          { icon: 'fa-truck-medical', title: 'জরুরি সেবা', desc: 'যেকোনো স্বাস্থ্যগত প্রয়োজনে দ্রুত জরুরি পরামর্শ ও টেলিমেডিসিন সহায়তা।' }
-        ].map((service, idx) => (
-          <div key={idx} className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border-t-4 border-blue-500 group hover:-translate-y-1">
-            <div className="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-              <i className={`fa-solid ${service.icon}`}></i>
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+        {/* Card 1 */}
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border-t-4 border-blue-500 group hover:-translate-y-1 flex flex-col h-full">
+          <div className="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <i className="fa-solid fa-user-nurse"></i>
           </div>
-        ))}
+          <h3 className="text-xl font-bold text-gray-800 mb-3">অনলাইন চিকিৎসা পরামর্শ সেবা</h3>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            ভিডিও কলে চিকিৎসা সেবা আপনাকে ঘরে বসেই সরাসরি চিকিৎসকের সাথে কথা বলার সুযোগ। মোবাইল বা কম্পিউটার ব্যবহার করে নিরাপদ ভিডিও কলে আপনি আপনার স্বাস্থ্য সমস্যার বিস্তারিত জানাতে পারবেন এবং তাৎক্ষণিক চিকিৎসা পরামর্শ গ্রহণ করতে পারবেন। রোগীর সমস্যা শুনে আধুনিক চিকিৎসা পদ্ধতি ও সঠিক গাইডেন্স প্রদান।
+          </p>
+        </div>
+
+        {/* Card 2 - New Content with Bullet Points */}
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border-t-4 border-blue-500 group hover:-translate-y-1 flex flex-col h-full">
+          <div className="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <i className="fa-solid fa-kit-medical"></i>
+          </div>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">যা যা চিকিৎসা পাবেন</h3>
+          <ul className="space-y-2 text-gray-600 text-[13px] leading-snug">
+            <li className="flex items-start">
+              <i className="fa-solid fa-circle-check text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+              <span>হাড় ভাঙা, আর্থ্রাইটিস, হাড়ের বিকৃতি, জয়েন্ট, পেশি, লিগামেন্ট  সমস্যা।  ।</span>
+            </li>
+            <li className="flex items-start">
+              <i className="fa-solid fa-circle-check text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+              <span>দীর্ঘস্থায়ী বা তীব্র ব্যথা নিরাময়ে বিশেষজ্ঞ। যেমন: মেরুদণ্ডের ব্যথা, ন্যূরোপ্যাথিক ব্যথা, রিউমাটিক ব্যথা।</span>
+            </li>
+            <li className="flex items-start">
+              <i className="fa-solid fa-circle-check text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+              <span> গাড়ি দুর্ঘটনা, পড়া, ঘর্ষণে হাড় বা অঙ্গপ্রত্যঙ্গের আঘাত।</span>
+            </li>
+            <li className="flex items-start">
+              <i className="fa-solid fa-circle-check text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+              <span>অঙ্গপ্রত্যঙ্গ বা শারীরিক কার্যক্ষমতা হারানো রোগীর পুনর্বাসন।</span>
+            </li>
+            <li className="flex items-start">
+              <i className="fa-solid fa-circle-check text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+              <span>অভ্যন্তরীণ অঙ্গ-প্রত্যঙ্গ ও সাধারণ রোগের সার্জারি। যেমন: পিত্তথলি, appendix অপারেশন, hernia সার্জারি।</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Card 3 */}
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border-t-4 border-blue-500 group hover:-translate-y-1 flex flex-col h-full">
+          <div className="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <i className="fa-solid fa-truck-medical"></i>
+          </div>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">জরুরি সেবা [On-Demand Doctor at Home]</h3>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            বয়স্ক ব্যক্তি, শিশু এবং যারা দীর্ঘমেয়াদী রোগে ভুগছেন, যেকোনো স্বাস্থ্যগত প্রয়োজনে দ্রুত জরুরি পরামর্শ দিতে নির্ধারিত সময়ে ডাক্তার আপনার বাসায় পৌঁছে যাবেন।
+          </p>
+        </div>
       </section>
     </div>
   );

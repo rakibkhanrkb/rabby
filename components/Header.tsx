@@ -40,7 +40,7 @@ const Header: React.FC = () => {
               <div className="h-3 w-px bg-white/20 hidden md:block"></div>
               <span className="hidden md:flex items-center text-[10px] font-semibold text-blue-100 opacity-80">
                 <i className="fa-solid fa-user-doctor mr-1"></i>
-                বিশেষজ্ঞ চিকিৎসক
+                চিকিৎসক
               </span>
             </div>
 

@@ -10,12 +10,16 @@ export interface Appointment {
   status: 'pending' | 'completed';
 }
 
+// Fixed: Added missing 'title2' and 'chember' properties to the DoctorInfo interface 
+// to align with the properties used in the DOCTOR_INFO object.
 export interface DoctorInfo {
   name: string;
   title: string;
+  title2: string;
   degrees: string;
   hospital: string;
   location: string;
+  chember: string;
 }
 
 export const DOCTOR_INFO: DoctorInfo = {
