@@ -5,7 +5,7 @@ import { DOCTOR_INFO } from '../types';
 
 const Header: React.FC = () => {
   const govtLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1024px-Government_Seal_of_Bangladesh.svg.png";
-  const doctorImageUrl = "/pictures/rabbi.jpg";
+  const doctorImageUrl = "/pictures/rabbi2.jpg";
 
   return (
     <header className="bg-blue-700 text-white shadow-lg no-print sticky top-0 z-50">
