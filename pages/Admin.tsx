@@ -4,7 +4,11 @@ import { dbService } from '../firebase';
 import { Appointment, DOCTOR_INFO } from '../types';
 
 const Admin: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Persistence: Initialize state from localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return localStorage.getItem('isAdminLoggedIn') === 'true';
+  });
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -13,13 +17,26 @@ const Admin: React.FC = () => {
   const [filterDate, setFilterDate] = useState(new Date().toISOString().split('T')[0]);
   const govtLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1024px-Government_Seal_of_Bangladesh.svg.png";
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [isLoggedIn]);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (username === 'rabby89' && password === 'rabby89') {
+      localStorage.setItem('isAdminLoggedIn', 'true');
       setIsLoggedIn(true);
-      fetchData();
     } else {
       alert("ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
+    }
+  };
+
+  const handleLogout = () => {
+    if (window.confirm("আপনি কি নিশ্চিতভাবে লগআউট করতে চান?")) {
+      localStorage.removeItem('isAdminLoggedIn');
+      setIsLoggedIn(false);
     }
   };
 
@@ -96,6 +113,21 @@ const Admin: React.FC = () => {
 
   return (
     <div className="space-y-8 pb-12">
+      {/* Top Header Controls - No Print */}
+      <div className="flex justify-between items-center no-print bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+        <div className="flex items-center space-x-2">
+          <div className="bg-blue-600 w-2 h-2 rounded-full animate-pulse"></div>
+          <span className="text-sm font-bold text-gray-600 uppercase tracking-widest">Active Session</span>
+        </div>
+        <button 
+          onClick={handleLogout}
+          className="bg-red-50 text-red-600 px-4 py-2 rounded-xl font-bold text-sm hover:bg-red-600 hover:text-white transition-all flex items-center group shadow-sm border border-red-100"
+        >
+          <i className="fa-solid fa-power-off mr-2 group-hover:rotate-90 transition-transform"></i>
+          লগআউট করুন
+        </button>
+      </div>
+
       {/* Stats Cards - No Print */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 no-print">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100 border-l-4 border-l-blue-600">
@@ -120,9 +152,9 @@ const Admin: React.FC = () => {
       </div>
 
       {/* Controls - No Print */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-4 bg-white p-6 rounded-2xl shadow-sm no-print">
+      <div className="flex flex-col md:flex-row justify-between items-end gap-4 bg-white p-6 rounded-2xl shadow-sm no-print border border-gray-100">
         <div className="w-full md:w-auto">
-          <label className="block text-gray-700 font-bold mb-2 text-sm">তারিখ ভিত্তিক ফিল্টার</label>
+          <label className="block text-gray-700 font-bold mb-2 text-sm italic">তারিখ ভিত্তিক ফিল্টার</label>
           <input 
             type="date" 
             value={filterDate}
@@ -133,7 +165,7 @@ const Admin: React.FC = () => {
         <div className="flex gap-2">
           <button 
             onClick={fetchData}
-            className="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-200 transition-colors"
+            className="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-200 transition-colors border border-gray-200"
           >
             <i className="fa-solid fa-rotate mr-2"></i> রিফ্রেশ লিস্ট
           </button>
@@ -167,7 +199,7 @@ const Admin: React.FC = () => {
 
         <div className="p-6 md:p-10">
           <div className="flex justify-between items-center mb-6 no-print">
-            <h4 className="text-xl font-bold text-gray-800 flex items-center">
+            <h4 className="text-xl font-bold text-gray-800 flex items-center tracking-tight">
               <i className="fa-solid fa-clipboard-list mr-3 text-blue-600"></i>
               {new Date(filterDate).toLocaleDateString('bn-BD')} তারিখের তালিকা ({filteredAppointments.length} জন)
             </h4>
