@@ -6,6 +6,7 @@ export interface Appointment {
   age: string;
   serialNumber: number;
   date: string;
+  location: 'Chamber' | 'Hospital';
   timestamp: any;
   status: 'pending' | 'completed';
 }

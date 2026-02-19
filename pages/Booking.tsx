@@ -12,7 +12,8 @@ const Booking: React.FC = () => {
     patientName: '',
     phone: '',
     age: '',
-    date: new Date().toISOString().split('T')[0]
+    date: new Date().toISOString().split('T')[0],
+    location: 'Chamber' as 'Chamber' | 'Hospital'
   });
   const navigate = useNavigate();
 
@@ -72,7 +73,7 @@ const Booking: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
     if (name === 'patientName') {
@@ -194,6 +195,29 @@ const Booking: React.FC = () => {
             className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             required
           />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="location">সাক্ষাতের স্থান (চেম্বার / হাসপাতাল)</label>
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <i className="fa-solid fa-location-dot"></i>
+            </span>
+            <select
+              name="location"
+              id="location"
+              value={formData.location}
+              onChange={handleChange}
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none"
+              required
+            >
+              <option value="Chamber">চেম্বার (দি লাইফ কেয়ার ডায়াগনস্টিক সেন্টার)</option>
+              <option value="Hospital">হাসপাতাল (কাজিপুর উপজেলা স্বাস্থ্য কমপ্লেক্স)</option>
+            </select>
+            <span className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+              <i className="fa-solid fa-chevron-down"></i>
+            </span>
+          </div>
         </div>
 
         <button

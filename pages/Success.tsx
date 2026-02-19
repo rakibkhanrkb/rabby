@@ -115,6 +115,14 @@ const Success: React.FC = () => {
             <span className="text-gray-500">সাক্ষাতের তারিখ:</span>
             <span className="font-bold">{new Date(appointment.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           </div>
+          <div className="flex justify-between border-b border-gray-200 pb-2">
+            <span className="text-gray-500">সাক্ষাতের স্থান:</span>
+            <span className="font-bold text-blue-700">
+              {appointment.location === 'Chamber' 
+                ? 'চেম্বার (দি লাইফ কেয়ার ডায়াগনস্টিক সেন্টার)' 
+                : 'হাসপাতাল (কাজিপুর উপজেলা স্বাস্থ্য কমপ্লেক্স)'}
+            </span>
+          </div>
         </div>
 
         <div className="mt-8 text-center text-[10px] text-gray-400">

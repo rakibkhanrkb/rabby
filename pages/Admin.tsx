@@ -240,6 +240,7 @@ const Admin: React.FC = () => {
                   <th className="px-6 py-4 font-black text-blue-900 border-r border-gray-200 w-20">ক্রমিক</th>
                   <th className="px-6 py-4 font-black text-blue-900 border-r border-gray-200">রোগীর নাম</th>
                   <th className="px-6 py-4 font-black text-blue-900 border-r border-gray-200">ফোন নম্বর</th>
+                  <th className="px-6 py-4 font-black text-blue-900 border-r border-gray-200">স্থান</th>
                   <th className="px-6 py-4 font-black text-blue-900 border-r border-gray-200 text-center w-24">বয়স</th>
                   <th className="px-6 py-4 font-black text-blue-900 text-right w-40">রেজিস্ট্রেশন সময়</th>
                 </tr>
@@ -255,6 +256,9 @@ const Admin: React.FC = () => {
                     </td>
                     <td className={`px-6 py-4 border-r border-gray-200 font-mono font-medium ${app.isReserved ? 'text-gray-300' : 'text-gray-700'}`}>
                       {app.phone}
+                    </td>
+                    <td className={`px-6 py-4 border-r border-gray-200 text-sm ${app.isReserved ? 'text-gray-300' : 'font-bold text-blue-600'}`}>
+                      {app.isReserved ? '--' : (app.location === 'Chamber' ? 'চেম্বার (দি লাইফ কেয়ার)' : 'হাসপাতাল (কাজিপুর স্বাস্থ্য কমপ্লেক্স)')}
                     </td>
                     <td className={`px-6 py-4 text-center border-r border-gray-200 ${app.isReserved ? 'text-gray-300' : 'text-gray-700'}`}>
                       {app.age} {app.age !== '--' ? 'বছর' : ''}
